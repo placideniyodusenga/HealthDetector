@@ -1,0 +1,884 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us - Student Fainting Detection System</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #333;
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        /* Navigation Bar */
+        nav {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 1rem 0;
+            box-shadow: 0 2px 20px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        nav a {
+            color: #2c3e50;
+            text-decoration: none;
+            margin: 0 25px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+        }
+
+        nav a:hover {
+            color: #667eea;
+            background: rgba(102, 126, 234, 0.1);
+            transform: translateY(-2px);
+        }
+
+        nav a:last-child {
+            color: #667eea;
+            font-weight: 700;
+        }
+
+        /* Main Container */
+        .container {
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        /* Header Section */
+        .contact-header {
+            text-align: center;
+            color: white;
+            margin-bottom: 50px;
+        }
+
+        .contact-header h1 {
+            font-size: 3rem;
+            margin-bottom: 15px;
+            animation: fadeInDown 1s ease;
+        }
+
+        .contact-header p {
+            font-size: 1.2rem;
+            opacity: 0.95;
+            max-width: 700px;
+            margin: 0 auto;
+            animation: fadeInUp 1s ease;
+        }
+
+        /* Contact Grid */
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1.5fr;
+            gap: 30px;
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 25px 50px rgba(0,0,0,0.2);
+            margin-bottom: 40px;
+        }
+
+        /* Contact Info Side */
+        .contact-info {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px;
+        }
+
+        .contact-info h2 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .contact-info h2 i {
+            font-size: 2rem;
+        }
+
+        .contact-info > p {
+            margin-bottom: 40px;
+            opacity: 0.9;
+            line-height: 1.8;
+        }
+
+        .info-items {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .info-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+        }
+
+        .info-item i {
+            font-size: 1.5rem;
+            width: 30px;
+            color: rgba(255,255,255,0.9);
+        }
+
+        .info-item h3 {
+            font-size: 1.2rem;
+            margin-bottom: 5px;
+        }
+
+        .info-item p {
+            opacity: 0.9;
+            line-height: 1.6;
+        }
+
+        .info-item a {
+            color: white;
+            text-decoration: none;
+            transition: opacity 0.3s ease;
+        }
+
+        .info-item a:hover {
+            opacity: 0.8;
+            text-decoration: underline;
+        }
+
+        /* Social Links */
+        .social-links {
+            margin-top: 30px;
+        }
+
+        .social-links h3 {
+            margin-bottom: 15px;
+            font-size: 1.2rem;
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 15px;
+        }
+
+        .social-icons a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 45px;
+            height: 45px;
+            background: rgba(255,255,255,0.2);
+            border-radius: 50%;
+            color: white;
+            font-size: 1.3rem;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+
+        .social-icons a:hover {
+            background: white;
+            color: #667eea;
+            transform: translateY(-5px);
+        }
+
+        /* Contact Form Side */
+        .contact-form {
+            padding: 40px;
+            background: white;
+        }
+
+        .contact-form h2 {
+            font-size: 2rem;
+            color: #2c3e50;
+            margin-bottom: 30px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #2c3e50;
+            font-weight: 600;
+            font-size: 0.95rem;
+        }
+
+        label i {
+            color: #667eea;
+            margin-right: 5px;
+        }
+
+        input, textarea, select {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            font-family: inherit;
+        }
+
+        input:focus, textarea:focus, select:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        input:hover, textarea:hover, select:hover {
+            border-color: #999;
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        button {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        button i {
+            font-size: 1.2rem;
+        }
+
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(102, 126, 234, 0.4);
+        }
+
+        button:active {
+            transform: translateY(0);
+        }
+
+        /* Map Section */
+        .map-section {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 40px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .map-section h2 {
+            font-size: 1.8rem;
+            color: #2c3e50;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .map-section h2 i {
+            color: #667eea;
+        }
+
+        .map-container {
+            border-radius: 15px;
+            overflow: hidden;
+            height: 400px;
+        }
+
+        .map-container iframe {
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+
+        /* FAQ Section */
+        .faq-section {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            margin-bottom: 40px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .faq-section h2 {
+            font-size: 2rem;
+            color: #2c3e50;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .faq-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 25px;
+        }
+
+        .faq-item {
+            background: #f8f9fa;
+            padding: 25px;
+            border-radius: 15px;
+            transition: transform 0.3s ease;
+        }
+
+        .faq-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+
+        .faq-item h3 {
+            color: #2c3e50;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.2rem;
+        }
+
+        .faq-item h3 i {
+            color: #667eea;
+        }
+
+        .faq-item p {
+            color: #666;
+            line-height: 1.6;
+        }
+
+        /* Business Hours */
+        .hours-section {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 20px;
+            padding: 40px;
+            color: white;
+            margin-bottom: 40px;
+        }
+
+        .hours-section h2 {
+            font-size: 2rem;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .hours-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            text-align: center;
+        }
+
+        .hours-item {
+            padding: 20px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+        }
+
+        .hours-item i {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+        }
+
+        .hours-item h3 {
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+        }
+
+        .hours-item p {
+            opacity: 0.9;
+            line-height: 1.8;
+        }
+
+        .emergency {
+            margin-top: 20px;
+            padding: 20px;
+            background: rgba(231, 76, 60, 0.2);
+            border-radius: 15px;
+            text-align: center;
+            border: 1px solid rgba(255,255,255,0.3);
+        }
+
+        .emergency i {
+            font-size: 2rem;
+            margin-right: 10px;
+        }
+
+        .emergency a {
+            color: white;
+            font-size: 1.5rem;
+            font-weight: bold;
+            text-decoration: none;
+            border-bottom: 2px solid white;
+        }
+
+        .emergency a:hover {
+            color: #f1c40f;
+            border-bottom-color: #f1c40f;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 30px;
+            background: white;
+            border-radius: 15px;
+            color: #666;
+            box-shadow: 0 -5px 20px rgba(0,0,0,0.05);
+        }
+
+        footer i {
+            color: #e74c3c;
+        }
+
+        footer a {
+            color: #667eea;
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+
+        /* Success Message (hidden by default) */
+        .success-message {
+            background: #d4edda;
+            color: #155724;
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            display: none;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .success-message i {
+            font-size: 1.5rem;
+        }
+
+        .success-message.show {
+            display: flex;
+        }
+
+        /* Animations */
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            nav {
+                flex-wrap: wrap;
+                padding: 10px;
+            }
+            
+            nav a {
+                margin: 5px 10px;
+                font-size: 0.9rem;
+            }
+            
+            .contact-header h1 {
+                font-size: 2rem;
+            }
+            
+            .contact-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .form-row {
+                grid-template-columns: 1fr;
+                gap: 0;
+            }
+            
+            .faq-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .hours-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .map-container {
+                height: 300px;
+            }
+        }
+
+        @media (min-width: 769px) and (max-width: 1024px) {
+            .contact-grid {
+                grid-template-columns: 1fr 1.2fr;
+            }
+            
+            .faq-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .hours-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        /* Loading State */
+        button.loading {
+            opacity: 0.7;
+            cursor: not-allowed;
+        }
+
+        button.loading i {
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <a href="home.html">Home</a>
+        <a href="login.html">Login</a>
+        <a href="about.html">About Us</a>
+        <a href="features.html">Features</a>
+        <a href="dashboard.html">Dashboard</a>
+        <a href="contact.html">Contact</a>
+    </nav>
+
+    <div class="container">
+        <!-- Header -->
+        <div class="contact-header">
+            <h1>Get In Touch</h1>
+            <p>Have questions about our Student Fainting Detection System? We're here to help schools across Rwanda implement this life-saving technology.</p>
+        </div>
+
+        <!-- Contact Grid -->
+        <div class="contact-grid">
+            <!-- Contact Information -->
+            <div class="contact-info">
+                <h2><i class="fas fa-paper-plane"></i> Let's Talk</h2>
+                <p>We're dedicated to protecting students' health. Reach out to us through any of these channels:</p>
+                
+                <div class="info-items">
+                    <div class="info-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <div>
+                            <h3>Visit Us</h3>
+                            <p>KG 541 St, Kigali Innovation City<br>Kigali, Rwanda</p>
+                        </div>
+                    </div>
+                    
+                    <div class="info-item">
+                        <i class="fas fa-phone-alt"></i>
+                        <div>
+                            <h3>Call Us</h3>
+                            <p><a href="tel:+250788123456">+250 788 123 456</a> (Office)</p>
+                            <p><a href="tel:+250788789012">+250 788 789 012</a> (24/7 Support)</p>
+                        </div>
+                    </div>
+                    
+                    <div class="info-item">
+                        <i class="fas fa-envelope"></i>
+                        <div>
+                            <h3>Email Us</h3>
+                            <p><a href="mailto:info@faintingdetection.rw">info@faintingdetection.rw</a></p>
+                            <p><a href="mailto:support@faintingdetection.rw">support@faintingdetection.rw</a></p>
+                        </div>
+                    </div>
+                    
+                    <div class="info-item">
+                        <i class="fas fa-clock"></i>
+                        <div>
+                            <h3>Working Hours</h3>
+                            <p>Monday - Friday: 8:00 AM - 6:00 PM</p>
+                            <p>Saturday: 9:00 AM - 2:00 PM</p>
+                            <p>Sunday: Closed (Emergency only)</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="social-links">
+                    <h3>Follow Us</h3>
+                    <div class="social-icons">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Contact Form -->
+            <div class="contact-form">
+                <h2><i class="fas fa-envelope-open-text"></i> Send Message</h2>
+                
+                <div class="success-message" id="successMessage">
+                    <i class="fas fa-check-circle"></i>
+                    Thank you! Your message has been sent successfully. We'll respond within 24 hours.
+                </div>
+                
+                <form id="contactForm">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="firstName"><i class="fas fa-user"></i> First Name *</label>
+                            <input type="text" id="firstName" placeholder="John" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="lastName"><i class="fas fa-user"></i> Last Name *</label>
+                            <input type="text" id="lastName" placeholder="Doe" required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="email"><i class="fas fa-envelope"></i> Email Address *</label>
+                        <input type="email" id="email" placeholder="john.doe@school.rw" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="phone"><i class="fas fa-phone"></i> Phone Number</label>
+                        <input type="tel" id="phone" placeholder="+250 788 123 456">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="school"><i class="fas fa-school"></i> School/Institution *</label>
+                        <input type="text" id="school" placeholder="Name of your school" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="inquiryType"><i class="fas fa-tag"></i> Inquiry Type *</label>
+                        <select id="inquiryType" required>
+                            <option value="">Select an option</option>
+                            <option value="sales">Interested in purchasing</option>
+                            <option value="demo">Request a demo</option>
+                            <option value="support">Technical support</option>
+                            <option value="partnership">Partnership opportunity</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="message"><i class="fas fa-comment"></i> Message *</label>
+                        <textarea id="message" placeholder="Tell us about your needs..." required></textarea>
+                    </div>
+                    
+                    <button type="submit" id="submitBtn">
+                        <i class="fas fa-paper-plane"></i>
+                        Send Message
+                    </button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Emergency Contact Section -->
+        <div class="hours-section">
+            <h2><i class="fas fa-clock"></i> Our Availability</h2>
+            <div class="hours-grid">
+                <div class="hours-item">
+                    <i class="fas fa-calendar-day"></i>
+                    <h3>Weekdays</h3>
+                    <p>8:00 AM - 6:00 PM</p>
+                    <small>Full support</small>
+                </div>
+                <div class="hours-item">
+                    <i class="fas fa-calendar-week"></i>
+                    <h3>Saturdays</h3>
+                    <p>9:00 AM - 2:00 PM</p>
+                    <small>Limited support</small>
+                </div>
+                <div class="hours-item">
+                    <i class="fas fa-calendar-times"></i>
+                    <h3>Sundays</h3>
+                    <p>Closed</p>
+                    <small>Emergency only</small>
+                </div>
+            </div>
+            
+            <div class="emergency">
+                <i class="fas fa-exclamation-triangle"></i>
+                <strong>24/7 Emergency Support:</strong> 
+                <a href="tel:+250788789012">+250 788 789 012</a>
+                <p style="margin-top: 10px; font-size: 0.9rem;">For urgent fainting incidents or system failures</p>
+            </div>
+        </div>
+
+        <!-- Map Section -->
+        <div class="map-section">
+            <h2><i class="fas fa-map-marked-alt"></i> Find Us in Kigali</h2>
+            <div class="map-container">
+                <iframe 
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3987.475553525062!2d30.101234!3d-1.944567!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x19dca6b2f1b2b2b3%3A0x1b2b2b2b2b2b2b2b!2sKigali%20Innovation%20City!5e0!3m2!1sen!2srw!4v1234567890123!5m2!1sen!2srw" 
+                    allowfullscreen="" 
+                    loading="lazy">
+                </iframe>
+            </div>
+        </div>
+
+        <!-- FAQ Section -->
+        <div class="faq-section">
+            <h2><i class="fas fa-question-circle"></i> Frequently Asked Questions</h2>
+            <div class="faq-grid">
+                <div class="faq-item">
+                    <h3><i class="fas fa-clock"></i> How fast is your response?</h3>
+                    <p>We respond to all inquiries within 24 hours on weekdays. Emergency support is available 24/7 for schools with active systems.</p>
+                </div>
+                <div class="faq-item">
+                    <h3><i class="fas fa-truck"></i> Do you deliver nationwide?</h3>
+                    <p>Yes! We install and support our fainting detection systems in schools across all provinces of Rwanda.</p>
+                </div>
+                <div class="faq-item">
+                    <h3><i class="fas fa-wrench"></i> What about maintenance?</h3>
+                    <p>We provide regular maintenance and 24/7 technical support for all installed systems at no additional cost.</p>
+                </div>
+                <div class="faq-item">
+                    <h3><i class="fas fa-dollar-sign"></i> Is there a demo available?</h3>
+                    <p>Absolutely! Contact us to schedule a free demonstration at your school with a 7-day trial period.</p>
+                </div>
+                <div class="faq-item">
+                    <h3><i class="fas fa-users"></i> Do you train our staff?</h3>
+                    <p>Yes, we provide comprehensive training for teachers, nurses, and administrators on system usage.</p>
+                </div>
+                <div class="faq-item">
+                    <h3><i class="fas fa-shield-alt"></i> Is student data secure?</h3>
+                    <p>All health data is encrypted and stored securely in compliance with Rwandan data protection laws.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer>
+            <p><i class="fas fa-heart"></i> Committed to protecting Rwandan students | © 2024 Student Fainting Detection System</p>
+            <p style="margin-top: 10px; font-size: 0.9rem;">
+                <a href="#">Privacy Policy</a> | 
+                <a href="#">Terms of Service</a> |
+                <a href="#">FAQs</a> |
+                <a href="#">Careers</a>
+            </p>
+            <p style="margin-top: 10px; font-size: 0.8rem; opacity: 0.7;">
+                <i class="fas fa-map-pin"></i> Kigali Innovation City, Rwanda | <i class="fas fa-globe"></i> www.faintingdetection.rw
+            </p>
+        </footer>
+    </div>
+
+    <!-- JavaScript for Form Handling -->
+    <script>
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Get form elements
+            const submitBtn = document.getElementById('submitBtn');
+            const successMessage = document.getElementById('successMessage');
+            
+            // Show loading state
+            submitBtn.classList.add('loading');
+            submitBtn.innerHTML = '<i class="fas fa-spinner"></i> Sending...';
+            
+            // Simulate form submission (replace with actual AJAX call)
+            setTimeout(function() {
+                // Hide loading state
+                submitBtn.classList.remove('loading');
+                submitBtn.innerHTML = '<i class="fas fa-paper-plane"></i> Send Message';
+                
+                // Show success message
+                successMessage.classList.add('show');
+                
+                // Clear form
+                document.getElementById('contactForm').reset();
+                
+                // Hide success message after 5 seconds
+                setTimeout(function() {
+                    successMessage.classList.remove('show');
+                }, 5000);
+            }, 2000);
+            
+            // Here you would typically send the form data to your server
+            // Example:
+            /*
+            fetch('your-api-endpoint', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    firstName: document.getElementById('firstName').value,
+                    lastName: document.getElementById('lastName').value,
+                    email: document.getElementById('email').value,
+                    phone: document.getElementById('phone').value,
+                    school: document.getElementById('school').value,
+                    inquiryType: document.getElementById('inquiryType').value,
+                    message: document.getElementById('message').value
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                // Handle success
+            })
+            .catch(error => {
+                // Handle error
+            });
+            */
+        });
+
+        // Add input validation
+        const inputs = document.querySelectorAll('input, textarea, select');
+        inputs.forEach(input => {
+            input.addEventListener('invalid', function(e) {
+                e.preventDefault();
+                this.style.borderColor = '#e74c3c';
+            });
+            
+            input.addEventListener('input', function() {
+                this.style.borderColor = '#e0e0e0';
+            });
+        });
+
+        // Phone number formatting (optional)
+        document.getElementById('phone').addEventListener('input', function(e) {
+            let x = e.target.value.replace(/\D/g, '').match(/(\d{0,3})(\d{0,3})(\d{0,4})/);
+            e.target.value = !x[2] ? x[1] : '+' + x[1] + ' ' + x[2] + (x[3] ? ' ' + x[3] : '');
+        });
+    </script>
+</body>
+</html>

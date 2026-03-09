@@ -1,0 +1,31 @@
+/* Table */
+table.dashboard {
+    width: 80%;
+    margin: 20px auto;
+    border-collapse: collapse;
+}
+
+table.dashboard th {
+    background-color: #0077cc;
+    color: white;
+    padding: 10px;
+}
+
+table.dashboard td {
+    text-align: center;
+    padding: 8px;
+    border: 1px solid #ddd;
+}
+
+/* Button */
+button.dashboard-btn {
+    background-color: green;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+}
+
+button.dashboard-btn:hover {
+    background-color: darkgreen;
+}

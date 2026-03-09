@@ -1,0 +1,1020 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Features - Student Fainting Detection System</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #333;
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        /* Navigation Bar */
+        nav {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 1rem 0;
+            box-shadow: 0 2px 20px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        nav a {
+            color: #2c3e50;
+            text-decoration: none;
+            margin: 0 25px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+        }
+
+        nav a:hover {
+            color: #667eea;
+            background: rgba(102, 126, 234, 0.1);
+            transform: translateY(-2px);
+        }
+
+        nav a:nth-child(4) {
+            color: #667eea;
+            font-weight: 700;
+        }
+
+        /* Main Container */
+        .container {
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        /* Hero Section */
+        .features-hero {
+            text-align: center;
+            color: white;
+            margin-bottom: 60px;
+            padding: 40px 20px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+        }
+
+        .features-hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            animation: fadeInDown 1s ease;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+
+        .features-hero p {
+            font-size: 1.3rem;
+            max-width: 800px;
+            margin: 0 auto;
+            opacity: 0.95;
+            animation: fadeInUp 1s ease;
+        }
+
+        /* Feature Categories */
+        .category-tabs {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 50px;
+            flex-wrap: wrap;
+        }
+
+        .category-tab {
+            padding: 12px 30px;
+            background: white;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #2c3e50;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .category-tab:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+        }
+
+        .category-tab.active {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        /* Features Grid */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin-bottom: 60px;
+        }
+
+        .feature-card {
+            background: white;
+            border-radius: 20px;
+            padding: 40px 30px;
+            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: linear-gradient(90deg, #667eea, #764ba2);
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 25px 50px rgba(102, 126, 234, 0.3);
+        }
+
+        .feature-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .feature-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 25px;
+        }
+
+        .feature-icon i {
+            font-size: 2.5rem;
+            color: white;
+        }
+
+        .feature-card h3 {
+            font-size: 1.8rem;
+            color: #2c3e50;
+            margin-bottom: 15px;
+        }
+
+        .feature-card p {
+            color: #666;
+            line-height: 1.8;
+            margin-bottom: 20px;
+        }
+
+        .feature-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .feature-tag {
+            background: #f0f0f0;
+            padding: 5px 12px;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            color: #667eea;
+            font-weight: 600;
+        }
+
+        /* Technology Showcase */
+        .tech-showcase {
+            background: white;
+            border-radius: 30px;
+            padding: 60px 40px;
+            margin: 60px 0;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+
+        .tech-showcase h2 {
+            text-align: center;
+            font-size: 2.5rem;
+            color: #2c3e50;
+            margin-bottom: 20px;
+        }
+
+        .tech-showcase > p {
+            text-align: center;
+            color: #666;
+            max-width: 700px;
+            margin: 0 auto 50px;
+            font-size: 1.2rem;
+        }
+
+        .tech-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 30px;
+        }
+
+        .tech-item {
+            text-align: center;
+            padding: 30px 20px;
+            background: #f8f9fa;
+            border-radius: 15px;
+            transition: transform 0.3s ease;
+        }
+
+        .tech-item:hover {
+            transform: translateY(-5px);
+        }
+
+        .tech-item i {
+            font-size: 3rem;
+            color: #667eea;
+            margin-bottom: 15px;
+        }
+
+        .tech-item h4 {
+            font-size: 1.3rem;
+            color: #2c3e50;
+            margin-bottom: 10px;
+        }
+
+        .tech-item p {
+            color: #666;
+            font-size: 0.95rem;
+        }
+
+        /* Benefits Section */
+        .benefits-section {
+            margin: 60px 0;
+        }
+
+        .benefits-section h2 {
+            text-align: center;
+            font-size: 2.5rem;
+            color: white;
+            margin-bottom: 50px;
+        }
+
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+        }
+
+        .benefit-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 40px 30px;
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+
+        .benefit-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .benefit-number {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            font-weight: bold;
+            margin: 0 auto 20px;
+        }
+
+        .benefit-card h3 {
+            font-size: 1.5rem;
+            color: #2c3e50;
+            margin-bottom: 15px;
+        }
+
+        .benefit-card p {
+            color: #666;
+            line-height: 1.7;
+        }
+
+        /* Comparison Table */
+        .comparison-section {
+            background: white;
+            border-radius: 30px;
+            padding: 60px 40px;
+            margin: 60px 0;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+
+        .comparison-section h2 {
+            text-align: center;
+            font-size: 2.5rem;
+            color: #2c3e50;
+            margin-bottom: 40px;
+        }
+
+        .comparison-table {
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th {
+            background: #f8f9fa;
+            padding: 20px;
+            text-align: left;
+            font-size: 1.2rem;
+            color: #2c3e50;
+        }
+
+        td {
+            padding: 15px 20px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .feature-yes {
+            color: #2ecc71;
+            font-weight: bold;
+        }
+
+        .feature-no {
+            color: #e74c3c;
+        }
+
+        .highlight {
+            background: linear-gradient(135deg, #667eea20 0%, #764ba220 100%);
+            font-weight: 600;
+        }
+
+        /* Testimonials */
+        .testimonials-section {
+            margin: 60px 0;
+        }
+
+        .testimonials-section h2 {
+            text-align: center;
+            font-size: 2.5rem;
+            color: white;
+            margin-bottom: 50px;
+        }
+
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px;
+        }
+
+        .testimonial-card {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+        }
+
+        .testimonial-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .testimonial-avatar {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        .testimonial-info h4 {
+            color: #2c3e50;
+            font-size: 1.2rem;
+        }
+
+        .testimonial-info p {
+            color: #667eea;
+            font-size: 0.9rem;
+        }
+
+        .testimonial-text {
+            color: #666;
+            line-height: 1.8;
+            font-style: italic;
+            margin-bottom: 15px;
+        }
+
+        .testimonial-rating {
+            color: #f1c40f;
+        }
+
+        /* Call to Action */
+        .cta-section {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 30px;
+            padding: 60px 40px;
+            text-align: center;
+            color: white;
+            margin: 60px 0;
+        }
+
+        .cta-section h2 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+
+        .cta-section p {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            opacity: 0.95;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+        }
+
+        .cta-button {
+            padding: 15px 40px;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .cta-button.primary {
+            background: white;
+            color: #667eea;
+        }
+
+        .cta-button.secondary {
+            background: transparent;
+            color: white;
+            border: 2px solid white;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 30px;
+            background: white;
+            border-radius: 20px;
+            color: #666;
+            margin-top: 40px;
+        }
+
+        footer i {
+            color: #e74c3c;
+        }
+
+        footer a {
+            color: #667eea;
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+
+        /* Animations */
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            nav {
+                flex-wrap: wrap;
+                padding: 10px;
+            }
+            
+            nav a {
+                margin: 5px 10px;
+                font-size: 0.9rem;
+            }
+            
+            .features-hero h1 {
+                font-size: 2.2rem;
+            }
+            
+            .features-hero p {
+                font-size: 1.1rem;
+            }
+            
+            .tech-grid,
+            .benefits-grid,
+            .testimonials-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .cta-buttons {
+                flex-direction: column;
+            }
+            
+            .comparison-section {
+                padding: 30px 20px;
+            }
+            
+            .feature-card {
+                padding: 30px 20px;
+            }
+        }
+
+        @media (min-width: 769px) and (max-width: 1024px) {
+            .tech-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .benefits-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .testimonials-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <a href="home.html">Home</a>
+        <a href="login.html">Login</a>
+        <a href="about.html">About Us</a>
+        <a href="features.html">Features</a>
+        <a href="dashboard.html">Dashboard</a>
+        <a href="contact.html">Contact</a>
+    </nav>
+
+    <div class="container">
+        <!-- Hero Section -->
+        <div class="features-hero">
+            <h1><i class="fas fa-star"></i> Powerful Features</h1>
+            <p>Discover how our Student Fainting Detection System protects students across Rwanda with cutting-edge technology and real-time monitoring</p>
+        </div>
+
+        <!-- Category Tabs -->
+        <div class="category-tabs">
+            <button class="category-tab active" onclick="filterFeatures('all')">All Features</button>
+            <button class="category-tab" onclick="filterFeatures('monitoring')">Monitoring</button>
+            <button class="category-tab" onclick="filterFeatures('safety')">Safety</button>
+            <button class="category-tab" onclick="filterFeatures('analytics')">Analytics</button>
+            <button class="category-tab" onclick="filterFeatures('hardware')">Hardware</button>
+        </div>
+
+        <!-- Features Grid -->
+        <div class="features-grid" id="featuresGrid">
+            <!-- Monitoring Features -->
+            <div class="feature-card" data-category="monitoring">
+                <div class="feature-icon">
+                    <i class="fas fa-heartbeat"></i>
+                </div>
+                <h3>Real-Time Health Monitoring</h3>
+                <p>Continuous tracking of vital signs including heart rate, body temperature, and blood oxygen levels (SpO2) with high-precision sensors.</p>
+                <div class="feature-tags">
+                    <span class="feature-tag">24/7 Monitoring</span>
+                    <span class="feature-tag">Real-time Data</span>
+                    <span class="feature-tag">Multi-parameter</span>
+                </div>
+            </div>
+
+            <div class="feature-card" data-category="monitoring">
+                <div class="feature-icon">
+                    <i class="fas fa-brain"></i>
+                </div>
+                <h3>Fainting Prediction AI</h3>
+                <p>Advanced machine learning algorithms analyze vital sign patterns to predict potential fainting episodes up to 5 minutes before occurrence.</p>
+                <div class="feature-tags">
+                    <span class="feature-tag">AI-Powered</span>
+                    <span class="feature-tag">Predictive Analytics</span>
+                    <span class="feature-tag">Early Warning</span>
+                </div>
+            </div>
+
+            <!-- Safety Features -->
+            <div class="feature-card" data-category="safety">
+                <div class="feature-icon">
+                    <i class="fas fa-exclamation-triangle"></i>
+                </div>
+                <h3>Instant Emergency Alerts</h3>
+                <p>Immediate SMS and app notifications sent to school nurses, teachers, and emergency contacts when abnormal readings are detected.</p>
+                <div class="feature-tags">
+                    <span class="feature-tag">SMS Alerts</span>
+                    <span class="feature-tag">Push Notifications</span>
+                    <span class="feature-tag">Emergency Chain</span>
+                </div>
+            </div>
+
+            <div class="feature-card" data-category="safety">
+                <div class="feature-icon">
+                    <i class="fas fa-map-marker-alt"></i>
+                </div>
+                <h3>GPS Location Tracking</h3>
+                <p>Pinpoint the exact location of students during emergencies with integrated GPS, helping staff respond quickly anywhere on school grounds.</p>
+                <div class="feature-tags">
+                    <span class="feature-tag">Real-time Location</span>
+                    <span class="feature-tag">Geofencing</span>
+                    <span class="feature-tag">School Maps</span>
+                </div>
+            </div>
+
+            <!-- Analytics Features -->
+            <div class="feature-card" data-category="analytics">
+                <div class="feature-icon">
+                    <i class="fas fa-chart-line"></i>
+                </div>
+                <h3>Interactive Dashboard</h3>
+                <p>Comprehensive dashboard with real-time data visualization, historical trends, and customizable reports for health professionals.</p>
+                <div class="feature-tags">
+                    <span class="feature-tag">Real-time Graphs</span>
+                    <span class="feature-tag">Export Reports</span>
+                    <span class="feature-tag">Trend Analysis</span>
+                </div>
+            </div>
+
+            <div class="feature-card" data-category="analytics">
+                <div class="feature-icon">
+                    <i class="fas fa-database"></i>
+                </div>
+                <h3>Student Health Records</h3>
+                <p>Secure digital storage of student medical history, past incidents, and health trends accessible to authorized medical staff.</p>
+                <div class="feature-tags">
+                    <span class="feature-tag">Medical History</span>
+                    <span class="feature-tag">Secure Storage</span>
+                    <span class="feature-tag">GDPR Compliant</span>
+                </div>
+            </div>
+
+            <!-- Hardware Features -->
+            <div class="feature-card" data-category="hardware">
+                <div class="feature-icon">
+                    <i class="fas fa-microchip"></i>
+                </div>
+                <h3>Advanced Wearable Sensor</h3>
+                <p>Lightweight, waterproof wearable device with MAX30100 sensor for accurate heart rate and SpO2 monitoring.</p>
+                <div class="feature-tags">
+                    <span class="feature-tag">Waterproof</span>
+                    <span class="feature-tag">Long Battery</span>
+                    <span class="feature-tag">Comfortable</span>
+                </div>
+            </div>
+
+            <div class="feature-card" data-category="hardware">
+                <div class="feature-icon">
+                    <i class="fas fa-bolt"></i>
+                </div>
+                <h3>Long-lasting Battery</h3>
+                <p>Rechargeable battery lasting up to 48 hours on a single charge with low-battery alerts and quick charging capability.</p>
+                <div class="feature-tags">
+                    <span class="feature-tag">48hr Battery</span>
+                    <span class="feature-tag">Quick Charge</span>
+                    <span class="feature-tag">Battery Alerts</span>
+                </div>
+            </div>
+
+            <div class="feature-card" data-category="monitoring">
+                <div class="feature-icon">
+                    <i class="fas fa-temperature-high"></i>
+                </div>
+                <h3>Temperature Monitoring</h3>
+                <p>Continuous body temperature tracking with alerts for fever, hypothermia, and abnormal temperature fluctuations.</p>
+                <div class="feature-tags">
+                    <span class="feature-tag">High Precision</span>
+                    <span class="feature-tag">Fever Detection</span>
+                    <span class="feature-tag">Trend Tracking</span>
+                </div>
+            </div>
+
+            <div class="feature-card" data-category="safety">
+                <div class="feature-icon">
+                    <i class="fas fa-hand-holding-heart"></i>
+                </div>
+                <h3>Fall Detection</h3>
+                <p>Built-in accelerometer detects sudden falls or collapses, automatically triggering emergency protocols.</p>
+                <div class="feature-tags">
+                    <span class="feature-tag">Motion Sensing</span>
+                    <span class="feature-tag">Impact Detection</span>
+                    <span class="feature-tag">Auto-Alert</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Technology Showcase -->
+        <div class="tech-showcase">
+            <h2><i class="fas fa-cogs"></i> Technology Behind the System</h2>
+            <p>Our fainting detection system combines multiple advanced technologies to ensure student safety</p>
+            
+            <div class="tech-grid">
+                <div class="tech-item">
+                    <i class="fas fa-heart"></i>
+                    <h4>MAX30100 Sensor</h4>
+                    <p>Heart rate and SpO2 monitoring with high accuracy</p>
+                </div>
+                <div class="tech-item">
+                    <i class="fas fa-thermometer-half"></i>
+                    <h4>DS18B20 Sensor</h4>
+                    <p>Precise body temperature measurement</p>
+                </div>
+                <div class="tech-item">
+                    <i class="fas fa-satellite"></i>
+                    <h4>GPS Module</h4>
+                    <p>Real-time location tracking</p>
+                </div>
+                <div class="tech-item">
+                    <i class="fas fa-wifi"></i>
+                    <h4>ESP32</h4>
+                    <p>WiFi and Bluetooth connectivity</p>
+                </div>
+                <div class="tech-item">
+                    <i class="fas fa-microchip"></i>
+                    <h4>Arduino</h4>
+                    <p>Reliable microcontroller processing</p>
+                </div>
+                <div class="tech-item">
+                    <i class="fas fa-chart-pie"></i>
+                    <h4>Cloud Analytics</h4>
+                    <p>Data processing and storage</p>
+                </div>
+                <div class="tech-item">
+                    <i class="fas fa-mobile-alt"></i>
+                    <h4>Mobile App</h4>
+                    <p>iOS and Android applications</p>
+                </div>
+                <div class="tech-item">
+                    <i class="fas fa-lock"></i>
+                    <h4>End-to-End Encryption</h4>
+                    <p>Secure data transmission</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Benefits Section -->
+        <div class="benefits-section">
+            <h2><i class="fas fa-gem"></i> Key Benefits</h2>
+            <div class="benefits-grid">
+                <div class="benefit-card">
+                    <div class="benefit-number">1</div>
+                    <h3>Early Detection</h3>
+                    <p>Predict fainting episodes up to 5 minutes before they occur, allowing staff to intervene and prevent injuries.</p>
+                </div>
+                <div class="benefit-card">
+                    <div class="benefit-number">2</div>
+                    <h3>Rapid Response</h3>
+                    <p>Average emergency response time reduced to under 2 minutes with instant alerts and GPS location.</p>
+                </div>
+                <div class="benefit-card">
+                    <div class="benefit-number">3</div>
+                    <h3>Data-Driven Care</h3>
+                    <p>Comprehensive health analytics help identify at-risk students and improve overall wellness programs.</p>
+                </div>
+                <div class="benefit-card">
+                    <div class="benefit-number">4</div>
+                    <h3>Peace of Mind</h3>
+                    <p>Parents and teachers can rest easy knowing students are constantly monitored by intelligent systems.</p>
+                </div>
+                <div class="benefit-card">
+                    <div class="benefit-number">5</div>
+                    <h3>Cost Effective</h3>
+                    <p>Reduce healthcare costs through prevention and early intervention rather than emergency treatment.</p>
+                </div>
+                <div class="benefit-card">
+                    <div class="benefit-number">6</div>
+                    <h3>Scalable Solution</h3>
+                    <p>Easily expand from one classroom to entire school districts with our cloud-based platform.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Comparison Table -->
+        <div class="comparison-section">
+            <h2><i class="fas fa-balance-scale"></i> Why Choose Our System?</h2>
+            <div class="comparison-table">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Feature</th>
+                            <th>Traditional Monitoring</th>
+                            <th>Our System</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Real-time Monitoring</td>
+                            <td class="feature-no"><i class="fas fa-times"></i> Manual checks only</td>
+                            <td class="feature-yes"><i class="fas fa-check"></i> 24/7 Automated</td>
+                        </tr>
+                        <tr>
+                            <td>Fainting Prediction</td>
+                            <td class="feature-no"><i class="fas fa-times"></i> Not available</td>
+                            <td class="feature-yes"><i class="fas fa-check"></i> AI-powered prediction</td>
+                        </tr>
+                        <tr>
+                            <td>Emergency Alerts</td>
+                            <td class="feature-no"><i class="fas fa-times"></i> Delayed reporting</td>
+                            <td class="feature-yes"><i class="fas fa-check"></i> Instant notifications</td>
+                        </tr>
+                        <tr>
+                            <td>Location Tracking</td>
+                            <td class="feature-no"><i class="fas fa-times"></i> Manual search</td>
+                            <td class="feature-yes"><i class="fas fa-check"></i> GPS precision</td>
+                        </tr>
+                        <tr>
+                            <td>Data Analytics</td>
+                            <td class="feature-no"><i class="fas fa-times"></i> Paper records</td>
+                            <td class="feature-yes"><i class="fas fa-check"></i> Cloud analytics</td>
+                        </tr>
+                        <tr class="highlight">
+                            <td><strong>Response Time</strong></td>
+                            <td><strong>15-30 minutes</strong></td>
+                            <td><strong>< 2 minutes</strong></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Testimonials -->
+        <div class="testimonials-section">
+            <h2><i class="fas fa-comments"></i> What Schools Are Saying</h2>
+            <div class="testimonials-grid">
+                <div class="testimonial-card">
+                    <div class="testimonial-header">
+                        <div class="testimonial-avatar">M</div>
+                        <div class="testimonial-info">
+                            <h4>Marie Uwase</h4>
+                            <p>Head Nurse, FAWE Girls School</p>
+                        </div>
+                    </div>
+                    <div class="testimonial-text">
+                        "Since implementing this system, we've prevented 3 fainting incidents that could have led to serious injuries. The early warnings give us time to help students before they collapse."
+                    </div>
+                    <div class="testimonial-rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="testimonial-header">
+                        <div class="testimonial-avatar">P</div>
+                        <div class="testimonial-info">
+                            <h4>Peter Niyonsenga</h4>
+                            <p>Principal, GSO Butare</p>
+                        </div>
+                    </div>
+                    <div class="testimonial-text">
+                        "The dashboard is incredibly intuitive. I can check the health status of all 500 students from my phone. Parents love knowing their children are safe."
+                    </div>
+                    <div class="testimonial-rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Call to Action -->
+        <div class="cta-section">
+            <h2>Ready to Protect Your Students?</h2>
+            <p>Join schools across Rwanda in implementing the most advanced fainting detection system</p>
+            <div class="cta-buttons">
+                <a href="contact.html" class="cta-button primary">
+                    <i class="fas fa-calendar-check"></i> Schedule Demo
+                </a>
+                <a href="dashboard.html" class="cta-button secondary">
+                    <i class="fas fa-chart-line"></i> View Live Dashboard
+                </a>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer>
+            <p><i class="fas fa-heart"></i> Protecting Rwandan students with advanced technology | © 2024 Student Fainting Detection System</p>
+            <p style="margin-top: 10px; font-size: 0.9rem;">
+                <a href="#">Privacy Policy</a> | 
+                <a href="#">Terms of Service</a> |
+                <a href="#">FAQ</a>
+            </p>
+        </footer>
+    </div>
+
+    <script>
+        // Feature filtering
+        function filterFeatures(category) {
+            // Update active tab
+            const tabs = document.querySelectorAll('.category-tab');
+            tabs.forEach(tab => {
+                if (tab.textContent.toLowerCase().includes(category) || 
+                    (category === 'all' && tab.textContent.includes('All'))) {
+                    tab.classList.add('active');
+                } else {
+                    tab.classList.remove('active');
+                }
+            });
+
+            // Filter features
+            const features = document.querySelectorAll('.feature-card');
+            features.forEach(feature => {
+                if (category === 'all' || feature.dataset.category === category) {
+                    feature.style.display = 'block';
+                } else {
+                    feature.style.display = 'none';
+                }
+            });
+        }
+
+        // Animate stats on scroll
+        const observerOptions = {
+            threshold: 0.5
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.benefit-card, .tech-item, .feature-card').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(20px)';
+            el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(el);
+        });
+
+        // Add hover effects for feature cards
+        document.querySelectorAll('.feature-card').forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-10px)';
+            });
+            card.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0)';
+            });
+        });
+    </script>
+</body>
+</html>
